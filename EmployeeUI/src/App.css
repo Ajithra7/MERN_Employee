@@ -1,0 +1,46 @@
+
+
+.navbar {
+  background-color: #E55C5C;
+}
+
+.btn.btn-outline {
+  color: #b55510;
+  font-weight: bolder;
+  font-size:larger;
+  background-color: #01bbbb;
+  margin-right: 10px;
+}
+
+.table-head {
+  background-color: #f09898;
+  color: #b55510;
+}
+
+
+.table.table-hover.table-bordered {
+  max-width: 1350px;
+  min-height: auto;
+  margin: 10px auto;
+  padding: 100px;
+  background-color: #e1b7b7;
+  border-radius: 5px;
+
+}
+
+#headings {
+  text-align: center;
+  text-decoration: dotted;
+  font-weight: bold;
+  color: #b55510;
+
+}
+
+.row.g-3.needs-validation
+{
+  background-color: #e1b7b7;
+  border-radius: 10px;
+  border: 2px solid #b55510;
+  padding:100px;
+  
+}
