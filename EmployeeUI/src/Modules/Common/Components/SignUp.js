@@ -1,18 +1,23 @@
-import axios from "axios";
 import {  useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button";
 import { Input } from "../../../Components/Form";
+import Axios from "../../../request";
 import Container from "../Container";
 
 const SignUp= () => {
   const navigate = useNavigate()
         const [loginData, setLoginData] = useState({})
         const createUser = async(data) => {
-           await axios.post("http://localhost:3001/create-user",data)
+           await Axios.post("create-user",data)
                 .then((response) => {
-                    console.log({response});
+                  console.log({response});
+                  if(response.data.success){
+                    let token = response.data.token
+                    localStorage.setItem('token',token)
                     navigate('/home')
+                  }
+                  alert(response.data.message||response.data.status)
                 })
                 .catch(error=>({error}));
         };
@@ -37,7 +42,7 @@ const inputHandler = (event) => {
       <form className = "row g-3 needs-validation" onSubmit={handleSubmit}>
       <Input label="Name" name="fullName"   onChange={inputHandler} />
         <Input label="email" name="email"   onChange={inputHandler} />
-        <Input label="Password" name="password" onChange={inputHandler}/>
+        <Input type = "password" label="Password" name="password" onChange={inputHandler}/>
         <Button label="SIGNUP" onChange={inputHandler}/>
         <Link to='/'>login</Link>
       </form>
