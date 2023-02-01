@@ -10,9 +10,15 @@ exports.createUser = async (req, res) => {
         return
     }
     const user = await User(req.body)
-    await user.save().then((res) => {
+    await user.save().then((us) => {
         console.log('saved')
-        res.send(user)
+        const token = jwt.sign({ userId: us._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+        res.send({
+            data: user,
+            token,
+            success: true,
+            message: 'signup success',
+        })
     }).catch((err) => {
         res.send({ message: err.message, status_code: '0' })
         console.log(err.message)
@@ -32,7 +38,13 @@ exports.signInUser = async (req, res) => {
         success: false,
         message: 'incorrect password',
     })
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' })
+    console.log({user})
+    const decodeData={
+        userId: user._id,
+        role: user.role||'USER'
+    }
+    console.log({decodeData})
+    const token = jwt.sign(decodeData, process.env.JWT_SECRET, { expiresIn: '1d' })
     return res.json({
         success: true,
         message: 'sign-in success',

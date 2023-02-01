@@ -15,5 +15,5 @@ router.get("/emp/:id", getEmp)
 
 router.post("/create-emp", createEmp)
 router.put("/update-emp", updateEmp)
-router.delete("/delete-emp", deleteEmp)
+router.post("/delete-emp", deleteEmp)
 module.exports = router;
